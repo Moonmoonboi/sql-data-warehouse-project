@@ -47,10 +47,10 @@ BEGIN
 		CASE WHEN UPPER(TRIM(cst_marital_status)) = 'S' Then 'Single'
 			 WHEN UPPER(TRIM(cst_marital_status)) = 'M' Then 'Married'
 			 ELSE 'n/a'
-		END cst_marital_status, -- Normalise marital status to readble format
+		END cst_marital_status, -- Normalise marital status to readable format
 		CASE WHEN UPPER(TRIM(cst_gndr)) = 'F' Then 'Female'
 			 WHEN UPPER(TRIM(cst_gndr)) = 'M' Then 'Male'
-			 ELSE 'n/a'  -- Normalise gender to readble format
+			 ELSE 'n/a'  -- Normalise gender to readable format
 		END cst_gndr,
 		cst_create_date
 		FROM(
@@ -91,7 +91,7 @@ BEGIN
 		END AS prd_line,	-- Map product line codes to descriptive values
 		CAST(prd_start_dt as DATE) AS prd_start_dt,
 		CAST(LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt)-1 AS DATE) as prd_end_dt
-		-- Calculate end date as one dat before the next start date
+		-- Calculate end date as one day before the next start date
 		FROM bronze.crm_prod_info
 		SET @end_time = GETDATE();
 		PRINT '>> Load Duration: '+ CAST(DATEDIFF(second,@start_Time, @end_time) AS NVARCHAR)+'seconds';
@@ -204,7 +204,7 @@ BEGIN
 	END TRY
 	BEGIN CATCH
 		PRINT '=========================================================='
-		PRINT 'ERROR OCCURED DURING LOADING BRONZE LAYER'
+		PRINT 'ERROR OCCURED DURING LOADING SILVER LAYER'
 		PRINT 'Error Message' + ERROR_MESSAGE();
 		PRINT 'Error Number' + CAST(ERROR_NUMBER()as NVARCHAR);
 		PRINT 'Error Message' + CAST(ERROR_STATE()as NVARCHAR);

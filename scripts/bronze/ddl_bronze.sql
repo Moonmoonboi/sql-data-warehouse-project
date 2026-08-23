@@ -1,5 +1,5 @@
 /*Script Purpose: This script creates tables in the 'bronze' schema, dropping existing tables if they already exist.
-Run this script to re-define the DDL structure of 'bronze' Tables
+Run this script to re-define the DDL structure of 'bronze' tables.
 */
 
 
@@ -51,7 +51,7 @@ CREATE TABLE bronze.erp_LOC_A101(
 	CID NVARCHAR(50),
 	CNTRY NVARCHAR(50)
 );
-IF OBJECT_ID ('bronze.erp_PX_CAT_G1V2(','U') IS NOT NULL 
+IF OBJECT_ID ('bronze.erp_PX_CAT_G1V2','U') IS NOT NULL
 	DROP TABLE bronze.erp_PX_CAT_G1V2
 CREATE TABLE bronze.erp_PX_CAT_G1V2(
 	ID NVARCHAR(50),
@@ -60,3 +60,4 @@ CREATE TABLE bronze.erp_PX_CAT_G1V2(
 	MAINTENANCE NVARCHAR(50)
 
 );
+
